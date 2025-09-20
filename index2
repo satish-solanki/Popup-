@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibrant Pop-up Window</title>
+  <!-- Tailwind CSS CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom CSS for the popup and overlay */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup {
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+      max-width: 90%;
+      width: 400px;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+
+    .popup h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 1rem;
+    }
+
+    .popup p {
+      font-size: 1rem;
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+    }
+
+    .popup-btn {
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .popup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .youtube-logo {
+      width: 28px;
+      height: 28px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-overlay" id="popup">
+    <div class="popup" id="popupBox">
+      <span class="close-btn" id="closeBtn">&times;</span>
+      <h2>Welcome to My Website!</h2>
+      <p>This is a vibrant, dynamic popup with hover effects.</p>
+
+      <!-- YouTube link with animated logo -->
+      <p class="text-center mt-6 flex items-center justify-center">
+        <!-- SVG for the YouTube logo -->
+        <svg class="youtube-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path fill="#FF0000" d="M549.655 124.083c-6.281-23.65-24.787-42.156-48.437-48.437C440.096 64 288 64 288 64S135.904 64 74.785 75.646c-23.65 6.281-42.156 24.787-48.437 48.437C16 176.096 16 256 16 256s0 79.904 10.348 131.917c6.281 23.65 24.787 42.156 48.437 48.437C135.904 448 288 448 288 448s152.096 0 213.215-11.646c23.65-6.281 42.156-24.787 48.437-48.437C560 335.904 560 256 560 256s0-79.904-10.345-131.917zM232 352V160l144 96-144 96z"/>
+        </svg>
+        <a href="https://www.youtube.com/@AmitSahCivil" target="_blank" class="text-red-500 font-bold hover:underline transition-colors duration-300">
+          Open my YouTube channel
+        </a>
+      </p>
+
+      <!-- Button linking to YouTube -->
+      <a href="https://www.youtube.com/@AmitSahCivil" target="_blank">
+        <button class="popup-btn mt-4">Explore Now</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Get the elements by their IDs
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Show the popup after a 2-second delay
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        popup.style.display = 'flex';
+      }, 2000);
+    });
+
+    // Function to close the popup
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+
+    // Add a click event listener to the close button
+    closeBtn.addEventListener('click', closePopup);
+
+    // Add a click event listener to the overlay to close it when the user clicks outside the box
+    popup.addEventListener('click', (event) => {
+      // Check if the click occurred directly on the overlay, not on the popup box
+      if (event.target === popup) {
+        closePopup();
+      }
+    });
+  </script>
+</body>
+</html>
